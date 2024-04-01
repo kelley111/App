@@ -33,7 +33,7 @@
         android:text="+3POINTS"
         android:id="@+id/con3"
         android:onClick="onClick3"
-        android:layout_gravity="center"
+
         />
     <Button
         android:layout_width="match_parent"
