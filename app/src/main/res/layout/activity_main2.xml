@@ -1,102 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".ScoreActivity2">
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="460dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:text="两队计分程序"
+        android:layout_gravity="center_vertical"
+        android:textStyle="italic"
+        android:textSize="40dp" />
+
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_weight="0.6"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TeamA"
-            android:textSize="50dp"
-            android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="440dp"
+            android:layout_weight="0.7"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:id="@+id/scores1"
-            android:textSize="60dp"
-            android:textStyle="bold"
-            android:gravity="center"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="+3POINTS"
-            android:id="@+id/s3"
-            android:onClick="click1"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="TeamA"
+                android:textSize="50dp" />
 
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="+2POINTS"
-            android:id="@+id/s2"
-            android:onClick="onClick2"
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="+1POINTS"
-            android:id="@+id/s1"
-            android:onClick="onClick1"
-            />
+            <TextView
+                android:id="@+id/scores1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="60dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/s3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="click1"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="+3POINTS" />
+
+            <Button
+                android:id="@+id/s2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="click1"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="+2POINTS" />
+
+            <Button
+                android:id="@+id/s1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="click1"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="+1POINTS" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="441dp"
+            android:layout_weight="0.7"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="TeamB"
+                android:textSize="50dp" />
+
+            <TextView
+                android:id="@+id/scores2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="60dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/s4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="click2"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="+3POINTS" />
+
+            <Button
+                android:id="@+id/s5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="click2"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="+2POINTS" />
+
+            <Button
+                android:id="@+id/s6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="click2"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="+1POINTS" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TeamB"
-            android:textSize="50dp"
-            android:gravity="center"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:id="@+id/scores2"
-            android:textSize="60dp"
-            android:textStyle="bold"
-            android:gravity="center"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="+3POINTS"
-            android:id="@+id/con6"
-            android:onClick="onClick6"
-
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="+2POINTS"
-            android:id="@+id/con5"
-            android:onClick="onClick5"
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="+1POINTS"
-            android:id="@+id/con4"
-            android:onClick="onClick4"
-            />
-
-    </LinearLayout>
+        android:layout_marginBottom="32dp"
+        android:text="Button"
+        android:onClick="click3"/>
 
 </LinearLayout>

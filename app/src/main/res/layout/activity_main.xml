@@ -56,26 +56,6 @@
         android:id="@+id/con0"
         android:onClick="onClick0"
         />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="—1POINTS"
-        android:id="@+id/con4"
-        android:onClick="onClick4"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="—2POINTS"
-        android:id="@+id/con5"
-        android:onClick="onClick5"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="-3POINTS"
-        android:id="@+id/con6"
-        android:onClick="onClick6"
-        />
+
 
 </LinearLayout>

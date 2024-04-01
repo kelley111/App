@@ -2,6 +2,7 @@ package com.example.myapplication9;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -39,24 +40,7 @@ public class MainActivity extends AppCompatActivity {
         show1.setText(String.valueOf(m));
 
     }
-    public void onClick4(View v){
-        m= m -1;
-        TextView show1 =findViewById(R.id.txtout1);
-        show1.setText(String.valueOf(m));
-
-    }
-    public void onClick5(View v){
-        m= m -2;
-        TextView show1 =findViewById(R.id.txtout1);
-        show1.setText(String.valueOf(m));
-
-    }
-    public void onClick6(View v){
-        m= m -3;
-        TextView show1 =findViewById(R.id.txtout1);
-        show1.setText(String.valueOf(m));
-
-    }
+   Intent intent =getIntent();
 
 
 
