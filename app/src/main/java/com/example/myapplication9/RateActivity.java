@@ -1,22 +1,62 @@
 package com.example.myapplication9;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class RateActivity extends AppCompatActivity {
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+
+public class RateActivity extends AppCompatActivity implements Runnable {
+    Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
+        //启动线程
+        Thread t = new Thread(this);
+        t.start();
+        Log.i(TAG,"onCreate:t.start().......");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        handler = new Handler(Looper.myLooper()){
+            @Override
+            public void handleMessage(@NonNull Message msg){
+                Log.i(TAG,"handleMessage:收到消息：+.....");
+                if(msg.what==6){
+                    Log.i(TAG,"handleMessage:what="+msg.what);
+                    Toast.makeText(RateActivity.this,"收到："+msg.obj,Toast.LENGTH_SHORT).show();
+                }
+                super.handleMessage(msg);
+            }
+        };
     }
+
     float dollar_rate=7.23F;
     float euro_rate =7.83F;
     float won_rate=0.0053F;
@@ -69,4 +109,45 @@ public class RateActivity extends AppCompatActivity {
             won_rate=bdl2.getFloat("won_key2",0f);}
         super.onActivityResult(requestCode,resultCode,data);
     }
+    @Override
+    public void run() {
+         Log.i(TAG, "run()........");
+
+        //获取网络数据
+        URL url = null;
+        try {
+            url =new URL("https://www.boc.cn/sourcedb/whpj/");
+            HttpURLConnection http =(HttpURLConnection)url.openConnection();
+            InputStream in = http.getInputStream();
+            String html = inputStream2String(in);
+            Log.i(TAG,"run:html="+html);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+         //发送数据回主线程
+        Message msg = handler.obtainMessage(6);
+        msg.obj = "hello Android";
+        handler.sendMessage(msg);
+        Log.i(TAG,"run:msg已发送");
+
+
+    }
+    private String  inputStream2String(InputStream inputStream)throws IOException{
+        final int bufferSize= 1024;
+        final char[]buffer =new char[bufferSize];
+        final StringBuilder out =new StringBuilder();
+        Reader in = new InputStreamReader(inputStream,"utf-8");
+        while (true){
+            int rsz = in.read(buffer,0,buffer.length);
+            if(rsz < 0)
+                break;
+            out.append(buffer,0,rsz);
+        }
+        return out.toString();
+    }
+
+
 }
