@@ -1,5 +1,4 @@
 package com.example.myapplication9;
-
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
@@ -18,6 +17,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,14 +30,13 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-
 public class RateActivity extends AppCompatActivity implements Runnable {
     Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
+
         //启动线程
         Thread t = new Thread(this);
         t.start();
@@ -42,8 +46,6 @@ public class RateActivity extends AppCompatActivity implements Runnable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-
         handler = new Handler(Looper.myLooper()){
             @Override
             public void handleMessage(@NonNull Message msg){
@@ -56,7 +58,6 @@ public class RateActivity extends AppCompatActivity implements Runnable {
             }
         };
     }
-
     float dollar_rate=7.23F;
     float euro_rate =7.83F;
     float won_rate=0.0053F;
@@ -112,28 +113,34 @@ public class RateActivity extends AppCompatActivity implements Runnable {
     @Override
     public void run() {
          Log.i(TAG, "run()........");
-
         //获取网络数据
-        URL url = null;
         try {
-            url =new URL("https://www.boc.cn/sourcedb/whpj/");
-            HttpURLConnection http =(HttpURLConnection)url.openConnection();
-            InputStream in = http.getInputStream();
-            String html = inputStream2String(in);
-            Log.i(TAG,"run:html="+html);
+            Document doc = Jsoup.connect("https://www.boc.cn/sourcedb/whpj/").get();
+            Elements tables = doc.getElementsByTag("table");
+            Element table2 = tables.get(1);
+            Log.i(TAG,"run:table2"+table2);
+            Elements trs =table2.getElementsByTag("tr");
+            for(Element tr:trs){
+                Elements tds = tr.getElementsByTag("td");
+                if(tds.size()>6){
+                    String rname = tds.get(0).text();
+                    String rateStr = tds.get(5).text();
+                    Log.i(TAG,"run:"+rname+"==>"+rateStr);
+                    if(rname.equals("欧元")){
+                        Log.i(TAG,"run:欧元汇率="+rateStr);
+                    }
+                }
+            }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }catch (IOException e){
             e.printStackTrace();
         }
-
          //发送数据回主线程
         Message msg = handler.obtainMessage(6);
         msg.obj = "hello Android";
         handler.sendMessage(msg);
         Log.i(TAG,"run:msg已发送");
-
-
     }
     private String  inputStream2String(InputStream inputStream)throws IOException{
         final int bufferSize= 1024;
@@ -144,10 +151,7 @@ public class RateActivity extends AppCompatActivity implements Runnable {
             int rsz = in.read(buffer,0,buffer.length);
             if(rsz < 0)
                 break;
-            out.append(buffer,0,rsz);
-        }
+            out.append(buffer,0,rsz);}
         return out.toString();
     }
-
-
 }

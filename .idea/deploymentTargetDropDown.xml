@@ -2,16 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="MainActivity">
+      <entry key="RateActivity">
         <State />
       </entry>
-      <entry key="RateActivity">
+      <entry key="RateListActivity2">
         <State />
       </entry>
       <entry key="ScoreActivity2">
         <State />
       </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="list_item">
         <State />
       </entry>
     </value>
